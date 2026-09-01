@@ -14,7 +14,7 @@ export default function About() {
             className={styles.imageWrap}
           >
             <div className={styles.imageFrame}>
-              <img src="/perfil.jpeg" alt="Gustavo Lino" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <img src="/perfil.jpg" alt="Gustavo Lino" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
             <div className={styles.decoBox}></div>
           </motion.div>
@@ -27,8 +27,7 @@ export default function About() {
             <div className={styles.tag}>Quem sou eu</div>
             <h2 className={styles.title}>Engenharia de <span>Software & Soluções</span></h2>
             <p className={styles.bio}>
-              Sou desenvolvedor Fullstack de Taguatinga, DF, cursando Engenharia de Software
-              e trabalhando na SEMOB-DF. Tenho vasta experiência prática com APIs em NestJS/TypeScript,
+              Sou desenvolvedor Fullstack de Taguatinga, DF, cursando Engenharia de Software. Tenho vasta experiência prática com APIs em NestJS/TypeScript,
               frontend em React, automações complexas em Python e pipelines de IA generativa com RAG e pgvector.
             </p>
             <p className={styles.bio}>
