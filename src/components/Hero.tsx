@@ -4,11 +4,12 @@ import { motion } from "framer-motion";
 import { Terminal, Code, BrainCircuit } from "lucide-react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Points, PointMaterial } from "@react-three/drei";
+// @ts-ignore
 import * as random from "maath/random/dist/maath-random.esm";
 import styles from "./Hero.module.css";
 
 function StarBackground(props: any) {
-  const ref = useRef<any>();
+  const ref = useRef<any>(null);
   // generate 5000 random points in a sphere
   const sphere = random.inSphere(new Float32Array(15000), { radius: 1.5 });
 
