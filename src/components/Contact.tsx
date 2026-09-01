@@ -14,13 +14,13 @@ export default function Contact() {
           className={`${styles.box} glass-panel`}
         >
           <div className={styles.glow} />
-          
+
           <h2 className={styles.title}>Vamos Conversar?</h2>
           <p className={styles.subtitle}>
-            Aberto a oportunidades estratégicas. Seja para criar automações complexas, 
+            Aberto a oportunidades estratégicas. Seja para criar automações complexas,
             integrar IA nos seus processos ou escalar plataformas governamentais.
           </p>
-          
+
           <div className={styles.links}>
             <a href="mailto:gustavolinomil@gmail.com" className={styles.link}>
               <Mail size={18} />
@@ -38,9 +38,9 @@ export default function Contact() {
           </div>
         </motion.div>
       </div>
-      
+
       <footer className={styles.footer}>
-        <p>Feito com ❤️ por Gustavo Lino © 2026</p>
+        <p>Feito por Gustavo Lino © 2026</p>
         <p>Taguatinga, DF — Brasil</p>
       </footer>
     </section>
