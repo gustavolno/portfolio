@@ -1,0 +1,85 @@
+.section {
+  padding: 6rem 5%;
+  background: var(--bg-secondary);
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 4rem;
+  text-align: center;
+}
+
+.tag {
+  font-family: var(--font-space-mono);
+  font-size: 0.85rem;
+  color: var(--accent-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.title span {
+  color: var(--text-muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  border-radius: 16px;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-secondary);
+}
+
+.iconWrap {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(0, 184, 255, 0.1);
+  color: var(--accent-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.degree {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.school {
+  font-family: var(--font-space-mono);
+  font-size: 0.85rem;
+  color: var(--accent-tertiary);
+  margin-bottom: 0.5rem;
+}
+
+.period {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
