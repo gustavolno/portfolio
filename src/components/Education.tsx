@@ -1,64 +1,44 @@
 "use client";
 import { motion } from "framer-motion";
-import { GraduationCap, Award } from "lucide-react";
 import styles from "./Education.module.css";
 
-const educations = [
-  {
-    degree: "Bacharelado em Engenharia de Software",
-    school: "Anhanguera",
-    period: "Conclusão: Dezembro 2026",
-    icon: <GraduationCap size={24} />
-  },
-  {
-    degree: "Técnico em Informática",
-    school: "Centro de Ensino Técnico Brazlândia",
-    period: "Conclusão: Julho 2023",
-    icon: <Award size={24} />
-  },
-  {
-    degree: "Análise de Dados com Python",
-    school: "Certificação Técnica",
-    period: "Concluído",
-    icon: <Award size={24} />
-  }
+const ease = [0.22, 1, 0.36, 1] as const;
+
+const items = [
+  { title: "Bacharelado em Engenharia de Software", where: "Anhanguera", when: "Conclusão em dezembro de 2026" },
+  { title: "Qlik Sense Developer (Módulos I e II) e Qlik Sense Server", where: "NowVertical Academy · 32 h presenciais", when: "Maio de 2026" },
+  { title: "Técnico em Informática", where: "Centro de Ensino Técnico de Brazlândia", when: "Concluído em julho de 2023" },
+  { title: "Análise de Dados com Python e Inglês Técnico para Desenvolvimento de Software", where: "Cursos complementares", when: "Concluídos" },
 ];
 
 export default function Education() {
   return (
-    <section id="education" className={styles.section}>
-      <div className={styles.container}>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
+    <section id="formacao" className={styles.section}>
+      <div className={styles.inner}>
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          className={styles.header}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease }}
         >
-          <div className={styles.tag}>Onde Aprendi</div>
-          <h2 className={styles.title}>Formação <span>Acadêmica</span></h2>
-        </motion.div>
-        
-        <div className={styles.grid}>
-          {educations.map((edu, idx) => (
-            <motion.div 
-              key={idx}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: idx * 0.1 }}
-              className={`${styles.card} glass-panel`}
+          Formação
+        </motion.h2>
+        <ul>
+          {items.map((it, i) => (
+            <motion.li
+              key={it.title}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.6, delay: i * 0.07, ease }}
             >
-              <div className={styles.iconWrap}>
-                {edu.icon}
-              </div>
-              <div>
-                <h3 className={styles.degree}>{edu.degree}</h3>
-                <h4 className={styles.school}>{edu.school}</h4>
-                <span className={styles.period}>{edu.period}</span>
-              </div>
-            </motion.div>
+              <h3>{it.title}</h3>
+              <p>
+                {it.where} · {it.when}
+              </p>
+            </motion.li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );

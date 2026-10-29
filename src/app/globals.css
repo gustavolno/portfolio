@@ -1,18 +1,21 @@
 :root {
-  --bg-primary: #05070a;
-  --bg-secondary: #0a0d14;
-  --bg-tertiary: #111622;
-  --card-bg: rgba(17, 22, 34, 0.4);
-  
-  --text-primary: #f0f4f8;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-  
-  --accent-primary: #00ffaa;
-  --accent-secondary: #00b8ff;
-  --accent-tertiary: #9d4edd;
-  
-  --border-color: rgba(45, 55, 72, 0.4);
+  --bg: #e9edf2;
+  --surface: #f8fafc;
+  --ink: #0b1020;
+  --ink-soft: #1a2140;
+  --muted: #55607a;
+  --blue: #2447ff;
+  --amber: #ff9f1c;
+  --green: #12b76a;
+  --red: #e5484d;
+  --line: rgba(11, 16, 32, 0.14);
+  --on-ink: #eef1fb;
+  --on-ink-muted: #9aa5c4;
+
+  --font-display: var(--font-bricolage), "Segoe UI", sans-serif;
+  --font-body: var(--font-figtree), "Segoe UI", sans-serif;
+  --gutter: clamp(20px, 5vw, 64px);
+  --max: 1180px;
 }
 
 * {
@@ -21,23 +24,28 @@
   margin: 0;
 }
 
-html,
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+}
+
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  scroll-behavior: smooth;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 50;
-  opacity: 0.5;
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
 }
 
 a {
@@ -49,26 +57,19 @@ ul {
   list-style: none;
 }
 
-/* Glassmorphism Classes */
-.glass-panel {
-  background: var(--card-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border-color);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-}
-
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg-primary);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--border-color);
+:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
   border-radius: 4px;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: var(--text-muted);
+
+::selection {
+  background: var(--blue);
+  color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
