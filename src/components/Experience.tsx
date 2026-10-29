@@ -1,76 +1,79 @@
 "use client";
-import { motion } from "framer-motion";
-import { Briefcase, Activity } from "lucide-react";
+import { useRef } from "react";
+import { motion, useScroll } from "framer-motion";
 import styles from "./Experience.module.css";
 
-const experiences = [
+const ease = [0.22, 1, 0.36, 1] as const;
+
+const jobs = [
   {
-    role: "Analista Administrativo & Engenheiro de Automações",
-    company: "Aldrigues Cândido Advogados",
-    period: "Atual",
-    description: "Reestruturação tecnológica e gestão documental de alta performance.",
-    achievements: [
-      "Desenvolvimento de robôs (Python/Playwright) de alta complexidade para acessar plataformas jurídicas (Global Office), preencher formulários dinâmicos e injetar JavaScript para contornar barreiras de segurança e máscaras de dados legadas.",
-      "Extração inteligente de dados em PDFs armazenados no Dropbox via PyMuPDF, automatizando leituras que antes eram 100% manuais e sujeitas a erro humano.",
-      "Construção de um Gerador Automático de Termos de Acordo integrado a bases de dados financeiras.",
-      "Manutenção de planilhas complexas, cruzamento de dados financeiros avançados e organização administrativa estratégica."
-    ]
+    company: "Aldrigues Cândido Advocacia",
+    role: "Estagiário de tecnologia · Automação e sistemas",
+    period: "2026 – hoje",
+    points: [
+      "Criei a Central AC Cobrança, com login por negociadora, painel de gestão e conciliação automática dos pagamentos.",
+      "Fiz um robô que calcula o atraso com multa no site do TJDFT a partir da ficha do cliente.",
+      "Automatizei termos de acordo, consultas a tribunais (e-SAJ, PJe e Eproc) e a leitura de termos escaneados com OCR.",
+    ],
   },
   {
-    role: "Estagiário de Tecnologia",
     company: "Secretaria de Mobilidade do DF (SEMOB-DF)",
-    period: "Maio 2025 - Agosto 2026",
-    description: "Governo do Distrito Federal: desenvolvendo sistemas de mobilidade urbana usados por toda a população do DF.",
-    achievements: [
-      "Modernização do módulo de Vinculação de Validadores do sistema de Transporte Urbano do DF (validadorVeiculo - antigo SITWEB) em TypeScript.",
-      "Desenvolvimento de APIs robustas com NestJS e TypeScript para suporte a sistemas críticos de mobilidade.",
-      "Implementação de pipeline completo de ingestão e busca semântica (RAG) utilizando Python, pgvector e Docling para consultas avançadas a LLMs baseadas em documentos internos.",
-      "Desenvolvimento de aplicação para upload e gestão de imagens de paraciclos de Brasília (telaImagens) integrada a bancos PostgreSQL/Oracle.",
-      "Gerenciamento de ambientes conteinerizados com Docker e geração de relatórios estratégicos com Qlik Sense."
-    ]
-  }
+    role: "Estagiário de tecnologia",
+    period: "Mai 2025 – Ago 2026",
+    points: [
+      "Reescrevi em NestJS e TypeScript o módulo de Vinculação de Validadores do Transporte Urbano do DF.",
+      "Desenvolvi APIs REST de sistemas de mobilidade usados por toda a população.",
+      "Montei um pipeline de busca semântica em documentos (RAG) com Python, Docling e pgvector.",
+      "Criei painéis gerenciais no Qlik Sense e otimizei consultas em Oracle e PostgreSQL.",
+      "Fiz uma aplicação para gerir as imagens dos paraciclos de Brasília e operei ambientes com Docker e Rancher.",
+    ],
+  },
 ];
 
 export default function Experience() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start 70%", "end 60%"],
+  });
+
   return (
-    <section id="experience" className={styles.section}>
-      <div className={styles.container}>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
+    <section id="experiencia" className={styles.section}>
+      <div className={styles.inner}>
+        <motion.h2
+          className={styles.heading}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          className={styles.header}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease }}
         >
-          <div className={styles.tag}>Trajetória</div>
-          <h2 className={styles.title}>Experiência <span>Profissional</span></h2>
-        </motion.div>
-        
-        <div className={styles.timeline}>
-          {experiences.map((exp, idx) => (
-            <motion.div 
-              key={idx}
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: idx * 0.2 }}
-              className={`${styles.card} glass-panel`}
+          Por onde passei
+        </motion.h2>
+
+        <div className={styles.timeline} ref={ref}>
+          <div className={styles.track} aria-hidden="true">
+            <motion.div className={styles.fill} style={{ scaleY: scrollYProgress }} />
+          </div>
+
+          {jobs.map((j) => (
+            <motion.article
+              key={j.company}
+              className={styles.job}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.7, ease }}
             >
-              <div className={styles.glow} />
-              <div className={styles.cardHeader}>
-                <div className={styles.companyWrap}>
-                  <Briefcase size={20} className={styles.icon} />
-                  <h3 className={styles.company}>{exp.company}</h3>
-                </div>
-                <span className={styles.period}>{exp.period}</span>
-              </div>
-              <h4 className={styles.role}>{exp.role}</h4>
-              <p className={styles.desc}>{exp.description}</p>
-              <ul className={styles.achievements}>
-                {exp.achievements.map((ach, i) => (
-                  <li key={i}><Activity size={16} className={styles.bullet} /> <span>{ach}</span></li>
+              <span className={styles.node} aria-hidden="true" />
+              <p className={styles.period}>{j.period}</p>
+              <h3>{j.company}</h3>
+              <p className={styles.role}>{j.role}</p>
+              <ul>
+                {j.points.map((p) => (
+                  <li key={p}>{p}</li>
                 ))}
               </ul>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
       </div>

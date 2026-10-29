@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
-import { Inter, Space_Mono } from "next/font/google";
+import { Bricolage_Grotesque, Figtree } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const spaceMono = Space_Mono({ 
-  weight: ["400", "700"], 
+const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
-  variable: "--font-space-mono" 
+  variable: "--font-bricolage",
+  weight: ["500", "700", "800"],
 });
+const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree" });
 
 export const metadata: Metadata = {
-  title: "Gustavo Lino | Engenheiro de Software & Automações",
-  description: "Portfólio de Gustavo Lino. Especialista em automações (Python), IA (RAG) e desenvolvimento web moderno (Next.js).",
+  title: "Gustavo Lino | Automação e Sistemas",
+  description:
+    "Portfólio de Gustavo Lino: automação em Python, APIs em NestJS e FastAPI e IA aplicada a documentos. Estagiário de tecnologia, formando em Engenharia de Software.",
 };
 
 export default function RootLayout({
@@ -20,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${inter.variable} ${spaceMono.variable}`}>
+    <html lang="pt-BR" className={`${bricolage.variable} ${figtree.variable}`}>
       <body>{children}</body>
     </html>
   );

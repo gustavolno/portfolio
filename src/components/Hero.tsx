@@ -1,83 +1,55 @@
 "use client";
-import { useRef } from "react";
 import { motion } from "framer-motion";
-import { Terminal, Code, BrainCircuit } from "lucide-react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Points, PointMaterial } from "@react-three/drei";
-// @ts-ignore
-import * as random from "maath/random/dist/maath-random.esm";
+import ChaosToOrder from "./ChaosToOrder";
 import styles from "./Hero.module.css";
 
-function StarBackground(props: any) {
-  const ref = useRef<any>(null);
-  // generate 5000 random points in a sphere
-  const sphere = random.inSphere(new Float32Array(15000), { radius: 1.5 });
-
-  useFrame((state, delta) => {
-    if (ref.current) {
-      ref.current.rotation.x -= delta / 10;
-      ref.current.rotation.y -= delta / 15;
-    }
-  });
-
-  return (
-    <group rotation={[0, 0, Math.PI / 4]}>
-      <Points ref={ref} positions={sphere} stride={3} frustumCulled={false} {...props}>
-        <PointMaterial
-          transparent
-          color="#00ffaa"
-          size={0.002}
-          sizeAttenuation={true}
-          depthWrite={false}
-        />
-      </Points>
-    </group>
-  );
-}
+const rise = {
+  hidden: { opacity: 0, y: 36 },
+  show: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, delay: 0.1 + i * 0.12, ease: [0.22, 1, 0.36, 1] as const },
+  }),
+};
 
 export default function Hero() {
   return (
-    <section className={styles.heroSection}>
-      <div className={styles.canvasContainer}>
-        <Canvas camera={{ position: [0, 0, 1] }}>
-          <StarBackground />
-        </Canvas>
-      </div>
-      
-      <div className={styles.glow1} />
-      <div className={styles.glow2} />
-      
-      <div className={styles.container}>
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className={styles.content}
+    <section id="topo" className={styles.hero}>
+      <div className={styles.inner}>
+        <div className={styles.text}>
+          <motion.p className={styles.kicker} variants={rise} initial="hidden" animate="show" custom={0}>
+            Estagiário de tecnologia · Engenharia de Software, 12/2026
+          </motion.p>
+          <motion.h1 className={styles.name} variants={rise} initial="hidden" animate="show" custom={1}>
+            Gustavo
+            <br />
+            Lino
+          </motion.h1>
+          <motion.p className={styles.lead} variants={rise} initial="hidden" animate="show" custom={2}>
+            Transformo o caos do dia a dia de um escritório em sistemas que rodam sozinhos.
+          </motion.p>
+          <motion.p className={styles.sub} variants={rise} initial="hidden" animate="show" custom={3}>
+            Automação em Python, APIs em NestJS e FastAPI e IA para buscar em documentos. Hoje no
+            Aldrigues Cândido Advocacia, antes na SEMOB-DF.
+          </motion.p>
+          <motion.div className={styles.actions} variants={rise} initial="hidden" animate="show" custom={4}>
+            <a href="#projetos" className={styles.primary}>
+              Ver a Central AC
+            </a>
+            <a href="/curriculo-gustavo-lino.pdf" className={styles.secondary} download>
+              Baixar currículo
+            </a>
+          </motion.div>
+        </div>
+
+        <motion.div
+          className={styles.visual}
+          initial={{ opacity: 0, scale: 0.94, rotate: 2 }}
+          animate={{ opacity: 1, scale: 1, rotate: 0 }}
+          transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className={styles.badge}>
-            <Terminal size={14} className={styles.icon} />
-            <span>Fullstack Developer & AI Engineer</span>
-          </div>
-          
-          <h1 className={styles.title}>
-            Gustavo <br/>
-            <span className={styles.highlight}>Lino.</span>
-          </h1>
-          
-          <p className={styles.subtitle}>
-            Construindo a ponte entre o <strong>caos administrativo</strong> e sistemas escaláveis. 
-            Especialista em automações (<strong>Python/Playwright</strong>), IA Generativa (<strong>RAG/pgvector</strong>) 
-            e desenvolvimento Web de alto desempenho (<strong>Next.js/NestJS</strong>).
-          </p>
-          
-          <div className={styles.actions}>
-            <a href="#projects" className={styles.primaryBtn}>
-              Meus Projetos <Code size={16} />
-            </a>
-            <a href="#experience" className={styles.secondaryBtn}>
-              Experiência <BrainCircuit size={16} />
-            </a>
-          </div>
+          <ChaosToOrder />
+          <p className={styles.hint}>Clique na janela para bagunçar e organizar de novo.</p>
         </motion.div>
       </div>
     </section>
